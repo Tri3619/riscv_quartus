@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 module Reg_File(
     input clk, 
     input rst, 
@@ -9,26 +8,10 @@ module Reg_File(
 );
 
 reg [31:0] Registers [31:0];
-integer i;
+integer i, k;
+
 // Khởi tạo giá trị ban đầu
 initial begin
-    
-    for (i = 0; i < 32; i = i + 1)
-        Registers[i] = 0;
-
-    // Khởi tạo giá trị đặc biệt nếu cần
-=======
-module Reg_File(clk, rst, RegWrite,Rs1,Rs2, Rd,Write_data,read_data1, read_data2);
-
-input clk, rst, RegWrite;
-input [4:0] Rs1,Rs2, Rd;
-input [31:0] Write_data;
-output [31:0] read_data1, read_data2;
-
-reg [31:0] Registers [31:0];
-
- initial begin
->>>>>>> c333abb1c4b9c592bb306c01d232af8ea8e60738
     Registers[0]  = 0;
     Registers[1]  = 4;
     Registers[2]  = 2;
@@ -63,9 +46,7 @@ reg [31:0] Registers [31:0];
     Registers[31] = 10;
 end
 
-<<<<<<< HEAD
 // Reset và ghi
-integer k;
 always @(posedge clk) begin
     if (rst) begin
         for (k = 0; k < 32; k = k + 1)
@@ -75,27 +56,8 @@ always @(posedge clk) begin
     end
 end
 
-// Bypass logic (forwarding) khi đang ghi cùng lúc với đọc
+// Bypass logic (forwarding) khi đọc-ghi cùng lúc
 assign read_data1 = (RegWrite && (Rs1 == Rd) && (Rd != 0)) ? Write_data : Registers[Rs1];
 assign read_data2 = (RegWrite && (Rs2 == Rd) && (Rd != 0)) ? Write_data : Registers[Rs2];
 
 endmodule
-=======
-integer k;
-always @(posedge clk) begin
-if (rst) 
-begin
-      for (k = 0; k < 32; k = k + 1) begin
-        Registers[k] = 32'b00;
-      end
-    end
-
-    else if (RegWrite ) begin
-      Registers[Rd] = Write_data;
-    end
-  end
-
-  assign read_data1 = Registers[Rs1];
-  assign read_data2 = Registers[Rs2];
-endmodule
->>>>>>> c333abb1c4b9c592bb306c01d232af8ea8e60738
