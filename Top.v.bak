@@ -12,13 +12,9 @@ PC_Adder PC_Adder(.pc_in(pc_out_wire),.pc_next(pc_next_wire));
 // PC Mux
 PC_Mux PC_Mux(.pc_in(pc_next_wire),.pc_branch(branch_target),.pc_select(Branch&Zero),.pc_out(pc_wire));
 // Instruction Memory
-Inst_Mem Instr_Mem(.rst(rst),.clk(clk),.read_address(pc_out_wire),.instruction_out(decode_wire));
+Instr_Mem Instr_Mem(.rst(rst),.clk(clk),.read_address(pc_out_wire),.instruction_out(decode_wire));
 // Register File
-<<<<<<< HEAD
-Reg_File Reg_File(.rst(rst), .clk(clk), .RegWrite(RegWrite), .Rs1(decode_wire[19:15]), .Rs2(decode_wire[24:20]), .Rd(decode_wire[14:10]), .Write_data(WB_data_wire), .read_data1(read_data1), .read_data2(regtomux));
-=======
 Reg_File Reg_File(.rst(rst), .clk(clk), .RegWrite(RegWrite), .Rs1(decode_wire[19:15]), .Rs2(decode_wire[24:20]), .Rd(decode_wire[11:7]), .Write_data(WB_data_wire), .read_data1(read_data1), .read_data2(regtomux));
->>>>>>> c333abb1c4b9c592bb306c01d232af8ea8e60738
 // Control Unit
 Control_Unit Control_Unit(.opcode(decode_wire[6:0]),.RegWrite(RegWrite),.MemRead(MemRead),.MemWrite(MemWrite),.MemToReg(MemToReg),.ALUSrc(ALUSrc),.Branch(Branch),.ALUOp(ALUOp_wire));
 // ALU_Control
